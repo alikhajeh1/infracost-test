@@ -1,9 +1,0 @@
-on: workflow_dispatch
-
-jobs:
-  infracost:
-    runs-on: ubuntu-latest
-    name: Test
-    steps:
-    - name: Test
-      run: echo "YES"

@@ -12,14 +12,14 @@ jobs:
       # Install the Infracost CLI, see https://github.com/infracost/actions/tree/master/setup
       # for other inputs such as version, and pricing_api_endpoint (for self-hosted users).
       - name: Setup Infracost
-        uses: infracost/actions/setup@v1
+        uses: infracost/actions/setup@v2
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Generate Infracost JSON
         id: infracost-commands
         run: |
-          infracost breakdown --path . --format json --out-file /tmp/infracost.json --terraform-parse-hcl
+          infracost breakdown --path . --format json --out-file /tmp/infracost.json
           echo "::set-output name=totalMonthlyCost::$(jq '$(.totalMonthlyCost // 0) | tonumber' /tmp/infracost.json)"
 
       - name: Create Awesome Badge
